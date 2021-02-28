@@ -9,7 +9,8 @@ import javax.inject.Singleton
 class ObjectMapperConfig: ObjectMapperCustomizer {
 
     override fun customize(objectMapper: ObjectMapper?) {
-        objectMapper?.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+        objectMapper
+            ?.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
     }
 
 }
