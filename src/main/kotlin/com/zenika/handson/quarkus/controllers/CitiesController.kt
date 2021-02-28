@@ -1,10 +1,9 @@
 package com.zenika.handson.quarkus.controllers
 
+import com.zenika.handson.quarkus.entities.City
 import com.zenika.handson.quarkus.repositories.CitiesRepository
-import javax.ws.rs.GET
-import javax.ws.rs.Path
-import javax.ws.rs.PathParam
-import javax.ws.rs.Produces
+import javax.validation.Valid
+import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
@@ -21,4 +20,8 @@ class CitiesController(private val citiesRepository: CitiesRepository) {
     fun city(@PathParam("city") city: String): Response = citiesRepository.getByName(city)
         ?.let { Response.ok(it).build() }
         ?: Response.status(Response.Status.NOT_FOUND).build()
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    fun create(@Valid city: City) = citiesRepository.save(city)
 }
