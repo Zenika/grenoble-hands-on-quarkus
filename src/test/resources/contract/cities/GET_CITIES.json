@@ -1,0 +1,16 @@
+[
+  {
+    "name": "GRENOBLE" ,
+    "position": {
+      "latitude": 45.183916 ,
+      "longitude": 5.703630
+    }
+  } ,
+  {
+    "name": "LYON" ,
+    "position": {
+      "latitude": 45.767443 ,
+      "longitude": 4.858798
+    }
+  }
+]
