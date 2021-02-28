@@ -1,7 +1,5 @@
 package com.zenika.handson.quarkus
 
-import com.zenika.handson.quarkus.entities.City
-import com.zenika.handson.quarkus.entities.GeoPosition
 import com.zenika.handson.quarkus.repositories.CitiesRepositoryJpa
 import io.quarkus.test.junit.QuarkusTest
 import io.restassured.RestAssured.given
@@ -13,7 +11,7 @@ import javax.transaction.Transactional
 
 
 @QuarkusTest
-class CitiesControllerTest {
+class WeatherControllerTest {
 
     @Inject
     lateinit var citiesRepositoryJpa: CitiesRepositoryJpa
@@ -25,30 +23,20 @@ class CitiesControllerTest {
     }
 
     @Test
-    fun `get all cities return 200`() {
+    fun `get weather for grenoble return 200`() {
         given()
             .`when`()
-            .get("/cities")
+            .get("/cities/GRENOBLE/weather")
             .then()
             .statusCode(200)
-            .body(sameJSONAs(javaClass.getResource("/contract/cities/GET_CITIES.json").readText()))
+            .body(sameJSONAs(javaClass.getResource("/contract/weather/GET_DAILY_WEATHER.json").readText()))
     }
 
     @Test
-    fun `get known city return 200`() {
+    fun `get weather for unknown return 404`() {
         given()
             .`when`()
-            .get("/cities/GRENOBLE")
-            .then()
-            .statusCode(200)
-            .body(sameJSONAs(javaClass.getResource("/contract/cities/GET_CITY.json").readText()))
-    }
-
-    @Test
-    fun `get unknown city return 404`() {
-        given()
-            .`when`()
-            .get("/cities/UNKNOWN")
+            .get("/cities/UNKNOWN/weather")
             .then()
             .statusCode(404)
     }
