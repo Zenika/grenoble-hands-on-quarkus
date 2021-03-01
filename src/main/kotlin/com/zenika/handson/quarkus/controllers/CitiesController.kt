@@ -2,6 +2,7 @@ package com.zenika.handson.quarkus.controllers
 
 import com.zenika.handson.quarkus.entities.City
 import com.zenika.handson.quarkus.repositories.CitiesRepository
+import javax.annotation.security.RolesAllowed
 import javax.validation.Valid
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
@@ -23,5 +24,6 @@ class CitiesController(private val citiesRepository: CitiesRepository) {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("ADMIN")
     fun create(@Valid city: City) = citiesRepository.save(city)
 }

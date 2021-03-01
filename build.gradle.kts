@@ -15,6 +15,8 @@ val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
 dependencies {
+    implementation("io.quarkus:quarkus-elytron-security-properties-file")
+    testImplementation("io.quarkus:quarkus-test-security")
     implementation("io.quarkus:quarkus-hibernate-validator")
     implementation("io.quarkus:quarkus-cache")
     implementation("io.quarkus:quarkus-rest-client")

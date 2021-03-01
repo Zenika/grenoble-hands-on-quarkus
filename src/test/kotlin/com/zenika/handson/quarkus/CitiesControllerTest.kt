@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 import uk.co.datumedge.hamcrest.json.SameJSONAs.sameJSONAs
 import javax.inject.Inject
 import javax.transaction.Transactional
-
+import io.quarkus.test.security.TestSecurity
 
 @QuarkusTest
 @Transactional
@@ -57,6 +57,7 @@ class CitiesControllerTest {
 
 
     @Test
+    @TestSecurity(user = "admin", roles = ["ADMIN"])
     fun `add new city return 201`() {
         given()
             .contentType(ContentType.JSON)
@@ -69,6 +70,7 @@ class CitiesControllerTest {
     }
 
     @Test
+    @TestSecurity(user = "admin", roles = ["ADMIN"])
     fun `add invalid city return 400`() {
         given()
             .contentType(ContentType.JSON)
